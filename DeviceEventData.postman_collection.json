@@ -1,0 +1,1253 @@
+{
+	"info": {
+		"_postman_id": "01245a8e-01ed-488d-84ff-a22a3154c989",
+		"name": "Usage Data API large date ranges",
+		"description": "409 if date range returns too much data (server runs out of memory).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78eece9e-8be3-40fe-9551-17459373c4fc",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"//store all increment values used in GET requests",
+							"var UD_INC_VALUES = ",
+							"[['UD_INC_MIN', 1], ",
+							"['UD_INC_5MIN', 5], ",
+							"['UD_INC_10MIN', 10], ",
+							"['UD_INC_15MIN', 15],",
+							"['UD_INC_HOUR', 60]];",
+							"pm.environment.set('UD_INC_VALUES',UD_INC_VALUES);",
+							"",
+							"//every bucketized getEventData GET request will have the quantity of events pushed to this array.",
+							"// var numRetrievedEvents = [];",
+							"// pm.environment.set('numRetrievedEvents',numRetrievedEvents);",
+							"",
+							"var retrievedEventData = [];",
+							"pm.environment.set('retrievedEventData', retrievedEventData);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\n}"
+				},
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"login"
+					]
+				},
+				"description": "login tcompany"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/Yw0VfB3LpS44cHDs2Vp7/actions/getUsageData?usageType=ud_dtype_kwh_odm&increment=ud_inc_30sec&startDateTime=2017-10-09 13:00:00&endDateTime=2019-09-09 13:00:00",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"Yw0VfB3LpS44cHDs2Vp7",
+						"actions",
+						"getUsageData"
+					],
+					"query": [
+						{
+							"key": "usageType",
+							"value": "ud_dtype_kwh_odm"
+						},
+						{
+							"key": "increment",
+							"value": "ud_inc_30sec"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2017-10-09 13:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-09 13:00:00"
+						}
+					]
+				},
+				"description": "get too much data (30 sec) (should cause 409)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device - eodg85ZFvcPosnuoXMOC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/Yw0VfB3LpS44cHDs2Vp7/actions/getUsageData?usageType=ud_dtype_kwh_odm&increment=ud_inc_30sec&startDateTime=2017-10-09 13:00:00&endDateTime=2019-09-09 13:00:00",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"Yw0VfB3LpS44cHDs2Vp7",
+						"actions",
+						"getUsageData"
+					],
+					"query": [
+						{
+							"key": "usageType",
+							"value": "ud_dtype_kwh_odm"
+						},
+						{
+							"key": "increment",
+							"value": "ud_inc_30sec"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2017-10-09 13:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-09 13:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get device, verify editParameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var assert = require ('assert');",
+							"var stringConstructor = \"test\".constructor;",
+							"var arrayConstructor = [].constructor;",
+							"var objectConstructor = {}.constructor;",
+							"var jsonData = pm.response.json();",
+							"// testSuccess = true;",
+							"baseObj = jsonData.data;",
+							"baseArr = []; //to store types of each JSON object in body.data",
+							"var i = 0;",
+							"var test = Object.keys(baseObj);",
+							"var key = test.indexOf(\"editParameters\");",
+							"// console.log(key);",
+							"// console.log(test);",
+							"",
+							"//iterate through body.data and check the types of each object.",
+							"for(var k in baseObj) {",
+							"    if(baseObj.hasOwnProperty(k) && k !== 'editParameters' && k !== '$ref' && k !== 'actions' && k !== 'network'){",
+							"        elementType = whatIsIt(baseObj[k]);",
+							"        el = {};",
+							"        el[k] = elementType;",
+							"        baseArr.push(el);",
+							"        // console.log(k + \" is of type \" + el[k]);",
+							"    }",
+							"    i++;",
+							"}",
+							"",
+							"// ediParametersObj = baseObj.editParameters;",
+							"// availableFields = ['fieldName','view','type','required','label','labelPlural','help'];",
+							"",
+							"// for(var ep in baseArr) {",
+							"//     key = _.keys(baseArr[ep]);",
+							"//     type = _.values(baseArr[ep]);",
+							"//     console.log(key + ' is of type: ' + type);",
+							"    ",
+							"//     if(type == 'String') {",
+							"//         result = _.result(ediParametersObj, key);",
+							"//         fields = _.keys( ediParametersObj[key] );",
+							"//         compareFields = fieldCompare(availableFields, fields);        ",
+							"    ",
+							"//         if(compareFields.length) {",
+							"//             testSuccess = false;",
+							"//             console.log(key + ' is missing: ' + compareFields);",
+							"//         }",
+							"//     }    ",
+							"",
+							"//     if(type == 'Array') {",
+							"",
+							"//         console.log(key + ' is an array');",
+							"//         // console.log(ediParametersObj[key]);",
+							"",
+							"//         fields = _.keys( ediParametersObj[key] );",
+							"",
+							"//         compareFields = fieldCompare(availableFields, fields);        ",
+							"",
+							"//         if(compareFields.length){",
+							"            ",
+							"//             testSuccess = false;",
+							"            ",
+							"//             console.log(key + ' is missing: ' + compareFields);",
+							"            ",
+							"//         }",
+							"",
+							"//     }    ",
+							"",
+							"//     if(type == 'Object'){",
+							"",
+							"//         console.log(key + ' is an object');",
+							"",
+							"//         // console.log(ediParametersObj[key]);",
+							"",
+							"//         fields = _.keys( ediParametersObj[key] );",
+							"",
+							"//         compareFields = fieldCompare(availableFields, fields);        ",
+							"",
+							"//         if(compareFields.length){",
+							"            ",
+							"//             testSuccess = false;",
+							"            ",
+							"//             console.log(key + ' is missing: ' + compareFields);",
+							"            ",
+							"//         }",
+							"",
+							"",
+							"//     }    ",
+							"",
+							"// }",
+							"",
+							"// // if(!testSuccess){",
+							"",
+							"// //     assert.ok(false);",
+							"",
+							"// // }",
+							"// // console.log('Test Success?: ' + testSuccess);",
+							"",
+							"// // //console.log(baseArr);",
+							"",
+							"// // function whatIsIt(object) {",
+							"// //     if (object === null) {",
+							"// //         return \"null\";",
+							"// //     }",
+							"// //     else if (object === undefined) {",
+							"// //         return \"undefined\";",
+							"// //     }",
+							"// //     else if (object.constructor === stringConstructor) {",
+							"// //         return \"String\";",
+							"// //     }",
+							"// //     else if (object.constructor === arrayConstructor) {",
+							"// //         return \"Array\";",
+							"// //     }",
+							"// //     else if (object.constructor === objectConstructor) {",
+							"// //         return \"Object\";",
+							"// //     }",
+							"// //     else {",
+							"// //         return \"don't know\";",
+							"// //     }",
+							"// // }",
+							"",
+							"// // function fieldCompare(list1,list2){",
+							"    ",
+							"// //     dif = _.difference(list1, list2);",
+							"    ",
+							"// //     return dif;",
+							"    ",
+							"// // }",
+							"",
+							"",
+							"// // /*",
+							"// // assert.ok(false);",
+							"",
+							"",
+							"// // obj = jsonData.data.editParameters.product.object;",
+							"",
+							"// // editableArr = [];",
+							"",
+							"// // for(var k in obj){",
+							"",
+							"// //     if(obj.hasOwnProperty(k)){",
+							"        ",
+							"// //         editableArr.push(k);",
+							"        ",
+							"// //     }",
+							"",
+							"// // }",
+							"",
+							"// // console.log(editableArr);",
+							"",
+							"",
+							"// // var items = [[1,2],[3,4],[5,6]];",
+							"// // alert(items[0][0]); ",
+							"",
+							"",
+							"// // hasFieldName = _.contains(fields, 'fieldName');",
+							"",
+							"// // if(!hasFieldName){",
+							"",
+							"// // console.log(key + ' has fieldname? ' + hasFieldName );",
+							"",
+							"// // }",
+							"",
+							"",
+							"// // //==== You will need to convert this to a Postman-compliant script ====",
+							"// // //==== (Select text and use Ctrl + / (Win) or Cmd + / (Mac) to uncomment ====",
+							"// // //var stringConstructor = \"test\".constructor;",
+							"// // //var arrayConstructor = [].constructor;",
+							"// // //var objectConstructor = {}.constructor;",
+							"// // //var jsonData = JSON.parse(response.body);",
+							"// // //",
+							"// // //testSuccess = true;",
+							"// // //",
+							"// // //baseObj = jsonData.data;",
+							"// // //",
+							"// // //baseArr = [];",
+							"// // //",
+							"// // //var i = 0;",
+							"// // //",
+							"// // //for(var k in baseObj){",
+							"// // //",
+							"// // //    if(baseObj.hasOwnProperty(k) && k != 'editParameters' && k != '$ref' && k != 'actions' && k != 'network'){",
+							"// // //        ",
+							"// // //        elementType = whatIsIt(baseObj[k]);",
+							"// // //        ",
+							"// // //        el = {};",
+							"// // //        ",
+							"// // //        el[k] = elementType;",
+							"// // //        ",
+							"// // //        baseArr.push(el);",
+							"// // //        ",
+							"// // //    }",
+							"// // //    ",
+							"// // //    i++;",
+							"// // //",
+							"// // //}",
+							"// // //",
+							"// // //ediParametersObj = jsonData.data.editParameters;",
+							"// // //",
+							"// // //availableFields = ['fieldName','view','type','required','label','labelPlural','help'];",
+							"// // //",
+							"// // //for(var ep in baseArr){",
+							"// // //",
+							"// // //    key = _.keys(baseArr[ep]);",
+							"// // //    type = _.values(baseArr[ep]);",
+							"// // //",
+							"// // //    //console.log(key + ' is of type: ' + type);",
+							"// // //    ",
+							"// // //    if(type == 'String'){",
+							"// // //        ",
+							"// // //        result = _.result(ediParametersObj, key);",
+							"// // //        ",
+							"// // //        fields = _.keys( ediParametersObj[key] );",
+							"// // //",
+							"// // //        compareFields = fieldCompare(availableFields, fields);        ",
+							"// // //    ",
+							"// // //        if(compareFields.length){",
+							"// // //            ",
+							"// // //            testSuccess = false;",
+							"// // //            ",
+							"// // //            console.log(key + ' is missing: ' + compareFields);",
+							"// // //            ",
+							"// // //        }",
+							"// // //    ",
+							"// // //    }    ",
+							"// // //",
+							"// // //    if(type == 'Array'){",
+							"// // //",
+							"// // //        console.log(key + ' is an array');",
+							"// // //",
+							"// // //        // console.log(ediParametersObj[key]);",
+							"// // //",
+							"// // //        fields = _.keys( ediParametersObj[key] );",
+							"// // //",
+							"// // //        compareFields = fieldCompare(availableFields, fields);        ",
+							"// // //",
+							"// // //        if(compareFields.length){",
+							"// // //            ",
+							"// // //            testSuccess = false;",
+							"// // //            ",
+							"// // //            console.log(key + ' is missing: ' + compareFields);",
+							"// // //            ",
+							"// // //        }",
+							"// // //",
+							"// // //    }    ",
+							"// // //",
+							"// // //    if(type == 'Object'){",
+							"// // //",
+							"// // //        console.log(key + ' is an object');",
+							"// // //",
+							"// // //        // console.log(ediParametersObj[key]);",
+							"// // //",
+							"// // //        fields = _.keys( ediParametersObj[key] );",
+							"// // //",
+							"// // //        compareFields = fieldCompare(availableFields, fields);        ",
+							"// // //",
+							"// // //        if(compareFields.length){",
+							"// // //            ",
+							"// // //            testSuccess = false;",
+							"// // //            ",
+							"// // //            console.log(key + ' is missing: ' + compareFields);",
+							"// // //            ",
+							"// // //        }",
+							"// // //",
+							"// // //",
+							"// // //    }    ",
+							"// // //",
+							"// // //}",
+							"// // //",
+							"// // //if(!testSuccess){",
+							"// // //",
+							"// // //    assert.ok(false);",
+							"// // //",
+							"// // //}",
+							"// // //console.log('Test Success?: ' + testSuccess);",
+							"// // //",
+							"// // ////console.log(baseArr);",
+							"",
+							"function whatIsIt(object) {",
+							"    if (object === null) {",
+							"        return \"null\";",
+							"    }",
+							"    else if (object === undefined) {",
+							"        return \"undefined\";",
+							"    }",
+							"    else if (object.constructor === stringConstructor) {",
+							"        return \"String\";",
+							"    }",
+							"    else if (object.constructor === arrayConstructor) {",
+							"        return \"Array\";",
+							"    }",
+							"    else if (object.constructor === objectConstructor) {",
+							"        return \"Object\";",
+							"    }",
+							"    else {",
+							"        return \"don't know\";",
+							"    }",
+							"}",
+							"",
+							"function fieldCompare(list1,list2) {",
+							"    dif = _.difference(list1, list2);",
+							"    return dif;",
+							"}",
+							"// // //",
+							"// // //",
+							"// // ///*",
+							"// // //assert.ok(false);",
+							"// // //",
+							"// // //",
+							"// // //obj = jsonData.data.editParameters.product.object;",
+							"// // //",
+							"// // //editableArr = [];",
+							"// // //",
+							"// // //for(var k in obj){",
+							"// // //",
+							"// // //    if(obj.hasOwnProperty(k)){",
+							"// // //        ",
+							"// // //        editableArr.push(k);",
+							"// // //        ",
+							"// // //    }",
+							"// // //",
+							"// // //}",
+							"// // //",
+							"// // //console.log(editableArr);",
+							"// // //",
+							"// // //",
+							"// // //var items = [[1,2],[3,4],[5,6]];",
+							"// // //alert(items[0][0]); ",
+							"// // //",
+							"// // //",
+							"// // //hasFieldName = _.contains(fields, 'fieldName');",
+							"// // //",
+							"// // //if(!hasFieldName){",
+							"// // //",
+							"// // //console.log(key + ' has fieldname? ' + hasFieldName );",
+							"// // //",
+							"// // //}",
+							"// // //",
+							"// // //*/",
+							"// // //",
+							"// // //"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC?editParameters=true",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC"
+					],
+					"query": [
+						{
+							"key": "editParameters",
+							"value": "true"
+						}
+					]
+				},
+				"description": "Get device usage data"
+			},
+			"response": []
+		},
+		{
+			"name": "1MIN: Check for correct event time increment interval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var moment = require('moment');",
+							"var assert = require ('assert');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"baseArr = [];",
+							"var i = -2;",
+							"var inc = pm.environment.get('UD_INC_VALUES');",
+							"//redundant, now that momen.js is implemented. ",
+							"// var startVal = values[0].dateTime.substr(values[0].dateTime);",
+							"// var endVal = moment(values[values.length-1].dateTime.substr(values[values.length-1].dateTime.indexOf(\"T\") + 1));",
+							"var startVal = values[0].dateTime;",
+							"pm.environment.set('firstEventDate', startVal);",
+							"",
+							"var endVal = values[values.length-1].dateTime;",
+							"pm.environment.set('lastEventDate' , endVal);",
+							"",
+							"var numRetrievedEvents = values.length;",
+							"pm.environment.set('numRetrievedEvents', numRetrievedEvents);",
+							"",
+							"if(baseObj.hasOwnProperty('values')) {",
+							"    for(var k in values) {",
+							"        // var time =   values[k].dateTime.substr(values[k].dateTime.indexOf(\"T\") + 1);",
+							"        // var hour = time.substring(0, time.indexOf(\":\"));",
+							"        // var minutes = time.substring(time.indexOf(\":\") + 1, time.length - 1);",
+							"        // minutes = minutes.substring(0, minutes.indexOf(\":\"));",
+							"        // hoursToMins = hour*60;",
+							"        // totalTime = parseInt(hoursToMins) + parseInt(minutes);",
+							"        var timeInMinutes = parseInt(moment(values[k].dateTime).minutes()) + ",
+							"        parseInt(moment(values[k].dateTime).hours()) * 60;",
+							"        baseArr.push(timeInMinutes);",
+							"        i++;",
+							"    }",
+							"} else {",
+							"    assert.ok(false, \"No event data found.\");",
+							"}",
+							"",
+							"//commented conditional just outputs ",
+							"for (j = baseArr.length-1; j > 0 && i >= 0;  j--, i--) {",
+							"    // if (baseArr[j] !== 0) {",
+							"    //     console.log(baseArr[j] + \" - \" + baseArr[i]);",
+							"    // }",
+							"    //change the last value based on the increment param (UD_INC_XXXX_). ",
+							"    if ((baseArr[j] !== 0) && (baseArr[j] - baseArr[i] !== inc[0][1])) {",
+							"        console.log(\"Time Interval Discrepancy!\\nInterval polled is inconsistent with HTTP Increment arg value: \" + inc[0][0]);",
+							"        assert.ok(false);",
+							"    }",
+							"}",
+							"",
+							"//store start date, end date, num events, and increment param into retrievedData. ",
+							"var retrievedData = pm.environment.get('retrievedEventData');",
+							"var data = [];",
+							"data.push(startVal, endVal, numRetrievedEvents, inc[0]);",
+							"retrievedData.push(data);",
+							"pm.environment.set('retrievedEventData', retrievedData);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC/actions/getEventData?eventType=CL__CHWR__T&bucketize=FIRST&startDateTime=2019-08-31T00:00:00&endDateTime=2019-09-01T00:00:00&increment=UD_INC_MIN",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "CL__CHWR__T"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2019-08-31T00:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-01T00:00:00"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_MIN"
+						}
+					]
+				},
+				"description": "Get device usage data"
+			},
+			"response": []
+		},
+		{
+			"name": "5MIN: Check for correct event time increment interval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var moment = require('moment');",
+							"var assert = require ('assert');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"baseArr = [];",
+							"var i = -2;",
+							"var inc = pm.environment.get('UD_INC_VALUES');",
+							"//redundant, now that momen.js is implemented. ",
+							"// var startVal = values[0].dateTime.substr(values[0].dateTime);",
+							"// var endVal = moment(values[values.length-1].dateTime.substr(values[values.length-1].dateTime.indexOf(\"T\") + 1));",
+							"var startVal = values[0].dateTime;",
+							"var endVal = values[values.length-1].dateTime;",
+							"pm.environment.set('firstEventDate', startVal);",
+							"pm.environment.set('lastEventDate' , endVal);",
+							"pm.environment.set('numEvents', values.length);",
+							"",
+							"var numRetrievedEvents = values.length;",
+							"pm.environment.set('numRetrievedEvents', numRetrievedEvents);",
+							"",
+							"",
+							"if(baseObj.hasOwnProperty('values')) {",
+							"    for(var k in values) {",
+							"        // var time =   values[k].dateTime.substr(values[k].dateTime.indexOf(\"T\") + 1);",
+							"        // var hour = time.substring(0, time.indexOf(\":\"));",
+							"        // var minutes = time.substring(time.indexOf(\":\") + 1, time.length - 1);",
+							"        // minutes = minutes.substring(0, minutes.indexOf(\":\"));",
+							"        // hoursToMins = hour*60;",
+							"        // totalTime = parseInt(hoursToMins) + parseInt(minutes);",
+							"        var timeInMinutes = parseInt(moment(values[k].dateTime).minutes()) + ",
+							"        parseInt(moment(values[k].dateTime).hours()) * 60;",
+							"        baseArr.push(timeInMinutes);",
+							"        i++;",
+							"    }",
+							"} else {",
+							"    assert.ok(false, \"No event data found.\");",
+							"}",
+							"",
+							"for (j = baseArr.length-1; j > 0 && i >= 0;  j--, i--) {",
+							"    // if (baseArr[j] !== 0) {",
+							"    //     console.log(baseArr[j] + \" - \" + baseArr[i]);",
+							"    // }",
+							"    //change the last value based on the increment param (UD_INC_XXXX_). ",
+							"    if ((baseArr[j] !== 0) && (baseArr[j] - baseArr[i] !== inc[1][1])) {",
+							"        console.log(\"Time Interval Discrepancy!\\nInterval polled is inconsistent with HTTP Increment arg value: \" + inc[1][0]);",
+							"        assert.ok(false);",
+							"    }",
+							"}",
+							"",
+							"//store start date, end date, num events, and increment param into retrievedData. ",
+							"var retrievedData = pm.environment.get('retrievedEventData');",
+							"var data = [];",
+							"data.push(startVal, endVal, numRetrievedEvents, inc[1]);",
+							"retrievedData.push(data);",
+							"pm.environment.set('retrievedEventData', retrievedData);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC/actions/getEventData?eventType=CL__CHWR__T&bucketize=FIRST&startDateTime=2019-08-31T00:00:00&endDateTime=2019-09-01T00:00:00&increment=UD_INC_5MIN",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "CL__CHWR__T"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2019-08-31T00:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-01T00:00:00"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_5MIN"
+						}
+					]
+				},
+				"description": "Get device usage data"
+			},
+			"response": []
+		},
+		{
+			"name": "10MIN: Check for correct event time increment interval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var moment = require('moment');",
+							"var assert = require ('assert');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"baseArr = [];",
+							"var i = -2;",
+							"var inc = pm.environment.get('UD_INC_VALUES');",
+							"//redundant, now that momen.js is implemented. ",
+							"// var startVal = values[0].dateTime.substr(values[0].dateTime);",
+							"// var endVal = moment(values[values.length-1].dateTime.substr(values[values.length-1].dateTime.indexOf(\"T\") + 1));",
+							"var startVal = values[0].dateTime;",
+							"var endVal = values[values.length-1].dateTime;",
+							"pm.environment.set('firstEventDate', startVal);",
+							"pm.environment.set('lastEventDate' , endVal);",
+							"pm.environment.set('numEvents', values.length);",
+							"",
+							"var numRetrievedEvents = values.length;",
+							"pm.environment.set('numRetrievedEvents', numRetrievedEvents);",
+							"",
+							"",
+							"if(baseObj.hasOwnProperty('values')) {",
+							"    for(var k in values) {",
+							"        // var time =   values[k].dateTime.substr(values[k].dateTime.indexOf(\"T\") + 1);",
+							"        // var hour = time.substring(0, time.indexOf(\":\"));",
+							"        // var minutes = time.substring(time.indexOf(\":\") + 1, time.length - 1);",
+							"        // minutes = minutes.substring(0, minutes.indexOf(\":\"));",
+							"        // hoursToMins = hour*60;",
+							"        // totalTime = parseInt(hoursToMins) + parseInt(minutes);",
+							"        var timeInMinutes = parseInt(moment(values[k].dateTime).minutes()) + ",
+							"        parseInt(moment(values[k].dateTime).hours()) * 60;",
+							"        baseArr.push(timeInMinutes);",
+							"        i++;",
+							"    }",
+							"} else {",
+							"    assert.ok(false, \"No event data found.\");",
+							"}",
+							"",
+							"for (j = baseArr.length-1; j > 0 && i >= 0;  j--, i--) {",
+							"    // if (baseArr[j] !== 0) {",
+							"    //     console.log(baseArr[j] + \" - \" + baseArr[i]);",
+							"    // }",
+							"    //change the last value based on the increment param (UD_INC_XXXX_). ",
+							"    if ((baseArr[j] !== 0) && (baseArr[j] - baseArr[i] !== inc[2][1])) {",
+							"        console.log(\"Time Interval Discrepancy!\\nInterval polled is inconsistent with HTTP Increment arg value: \" + inc[2][0]);",
+							"        assert.ok(false);",
+							"    }",
+							"}",
+							"",
+							"//store start date, end date, nusm events, and increment param into retrievedData. ",
+							"var retrievedData = pm.environment.get('retrievedEventData');",
+							"var data = [];",
+							"data.push(startVal, endVal, numRetrievedEvents, inc[2]);",
+							"retrievedData.push(data);",
+							"pm.environment.set('retrievedEventData', retrievedData);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC/actions/getEventData?eventType=CL__CHWR__T&bucketize=FIRST&startDateTime=2019-08-31T00:00:00&endDateTime=2019-09-01T00:00:00&increment=UD_INC_10MIN",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "CL__CHWR__T"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2019-08-31T00:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-01T00:00:00"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_10MIN"
+						}
+					]
+				},
+				"description": "Get device usage data"
+			},
+			"response": []
+		},
+		{
+			"name": "15MIN: Check for correct event time increment interval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var moment = require('moment');",
+							"var assert = require ('assert');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"baseArr = [];",
+							"var i = -2;",
+							"var inc = pm.environment.get('UD_INC_VALUES');",
+							"//redundant, now that moment.js is implemented. ",
+							"// var startVal = values[0].dateTime.substr(values[0].dateTime);",
+							"// var endVal = moment(values[values.length-1].dateTime.substr(values[values.length-1].dateTime.indexOf(\"T\") + 1));",
+							"var startVal = values[0].dateTime;",
+							"var endVal = values[values.length-1].dateTime;",
+							"pm.environment.set('firstEventDate', startVal);",
+							"pm.environment.set('lastEventDate' , endVal);",
+							"pm.environment.set('numEvents', values.length);",
+							"",
+							"var numRetrievedEvents = values.length;",
+							"pm.environment.set('numRetrievedEvents', numRetrievedEvents);",
+							"//this is how to retrieve the first and last events retrieved from JSON body.",
+							"// var a = moment(pm.environment.get('firstEventDate'));",
+							"// var b = moment(pm.environment.get('lastEventDate'));",
+							"",
+							"if(baseObj.hasOwnProperty('values')) {",
+							"    for(var k in values) {",
+							"        // var time =   values[k].dateTime.substr(values[k].dateTime.indexOf(\"T\") + 1);",
+							"        // var hour = time.substring(0, time.indexOf(\":\"));",
+							"        // var minutes = time.substring(time.indexOf(\":\") + 1, time.length - 1);",
+							"        // minutes = minutes.substring(0, minutes.indexOf(\":\"));",
+							"        // hoursToMins = hour*60;",
+							"        // totalTime = parseInt(hoursToMins) + parseInt(minutes);",
+							"        var timeInMinutes = parseInt(moment(values[k].dateTime).minutes()) + ",
+							"        parseInt(moment(values[k].dateTime).hours()) * 60;",
+							"        baseArr.push(timeInMinutes);",
+							"        i++;",
+							"    }",
+							"} else {",
+							"    assert.ok(false, \"No event data found.\");",
+							"}",
+							"",
+							"for (j = baseArr.length-1; j > 0 && i >= 0;  j--, i--) {",
+							"    // if (baseArr[j] !== 0) {",
+							"    //     console.log(baseArr[j] + \" - \" + baseArr[i]);",
+							"    // }",
+							"    //change the last value based on the increment param (UD_INC_XXXX_). ",
+							"    if ((baseArr[j] !== 0) && (baseArr[j] - baseArr[i] !== inc[3][1])) {",
+							"        console.log(\"Time Interval Discrepancy!\\nInterval polled is inconsistent with HTTP Increment arg value: \" + inc[3][0]);",
+							"        assert.ok(false);",
+							"    }",
+							"}",
+							"",
+							"//store start date, end date, num events, and increment param into retrievedData. ",
+							"var retrievedData = pm.environment.get('retrievedEventData');",
+							"var data = [];",
+							"data.push(startVal, endVal, numRetrievedEvents, inc[3]);",
+							"retrievedData.push(data);",
+							"pm.environment.set('retrievedEventData', retrievedData);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC/actions/getEventData?eventType=CL__CHWR__T&bucketize=FIRST&startDateTime=2019-08-31T00:00:00&endDateTime=2019-09-01T00:00:00&increment=UD_INC_15MIN",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "CL__CHWR__T"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2019-08-31T00:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-01T00:00:00"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_15MIN"
+						}
+					]
+				},
+				"description": "Get device usage data"
+			},
+			"response": []
+		},
+		{
+			"name": "1HOUR: Check event time increment -AND- Process and Format data from the 5 device event requests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad1e542f-cae8-44a5-836f-bbdb40db05a3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var moment = require('moment');",
+							"var assert = require ('assert');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"baseArr = [];",
+							"var i = -2;",
+							"var inc = pm.environment.get('UD_INC_VALUES');",
+							"//redundant, now that momen.js is implemented. ",
+							"// var startVal = values[0].dateTime.substr(values[0].dateTime);",
+							"// var endVal = moment(values[values.length-1].dateTime.substr(values[values.length-1].dateTime.indexOf(\"T\") + 1));",
+							"var startVal = values[0].dateTime;",
+							"var endVal = values[values.length-1].dateTime;",
+							"pm.environment.set('firstEventDate', startVal);",
+							"pm.environment.set('lastEventDate' , endVal);",
+							"pm.environment.set('numEvents', values.length);",
+							"",
+							"var numRetrievedEvents = values.length;",
+							"pm.environment.set('numRetrievedEvents', numRetrievedEvents);",
+							"//this is how to retrieve the first and last events retrieved from JSON body.",
+							"// var a = moment(pm.environment.get('firstEventDate'));",
+							"// var b = moment(pm.environment.get('lastEventDate'));",
+							"",
+							"if(baseObj.hasOwnProperty('values')) {",
+							"    for(var k in values) {",
+							"        // var time =   values[k].dateTime.substr(values[k].dateTime.indexOf(\"T\") + 1);",
+							"        // var hour = time.substring(0, time.indexOf(\":\"));",
+							"        // var minutes = time.substring(time.indexOf(\":\") + 1, time.length - 1);",
+							"        // minutes = minutes.substring(0, minutes.indexOf(\":\"));",
+							"        // hoursToMins = hour*60;",
+							"        // totalTime = parseInt(hoursToMins) + parseInt(minutes);",
+							"        var timeInMinutes = parseInt(moment(values[k].dateTime).minutes()) + ",
+							"        parseInt(moment(values[k].dateTime).hours()) * 60;",
+							"        baseArr.push(timeInMinutes);",
+							"        i++;",
+							"    }",
+							"} else {",
+							"    assert.ok(false, \"No event data found.\");",
+							"}",
+							"",
+							"for (j = baseArr.length-1; j > 0 && i >= 0;  j--, i--) {",
+							"    // if (baseArr[j] !== 0) {",
+							"    //     console.log(baseArr[j] + \" - \" + baseArr[i]);",
+							"    // }",
+							"    //change the last value based on the increment param (UD_INC_XXXX_). ",
+							"    if ((baseArr[j] !== 0) && (baseArr[j] - baseArr[i] !== inc[4][1])) {",
+							"        console.log(\"Time Interval Discrepancy!\\nInterval polled is inconsistent with HTTP Increment arg value: \" + inc[4][0]);",
+							"        assert.ok(false);",
+							"    }",
+							"}",
+							"",
+							"//store start date, end date, num events, and increment param into retrievedData. ",
+							"var retrievedData = pm.environment.get('retrievedEventData');",
+							"var data = [];",
+							"data.push(startVal, endVal, numRetrievedEvents, inc[4]);",
+							"retrievedData.push(data);",
+							"pm.environment.set('retrievedEventData', retrievedData);",
+							"",
+							"",
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var assert = require ('assert');",
+							"var moment = require ('moment');",
+							"var jsonData = pm.response.json();",
+							"baseObj = jsonData.data;",
+							"values = baseObj.values;",
+							"/*",
+							"this is all retrieved even data stored as an array of arrays, as so:",
+							"Elem1 [",
+							" 0: startEvenTDate",
+							" 1: endEventDate",
+							" 2: number of retrieved events",
+							" 3: increment [",
+							"     0: HTTP arg, String  ",
+							"     1: numerical value, integer",
+							"    ]",
+							"], ",
+							"Elem2 [",
+							"    ...",
+							"],",
+							"Elem3 ...",
+							"*/",
+							"",
+							"var retrievedEventData = pm.environment.get('retrievedEventData');",
+							"//view raw data",
+							"console.log(\"Consolidated view: \", retrievedEventData);",
+							"console.log(\"Detailed Data Review:\\n\");",
+							"",
+							"//view formatted data",
+							"for (var i = 0; i < retrievedEventData.length; i++) {",
+							"    // start = moment(eventData[i][0]);",
+							"    var startDateTime = moment(retrievedEventData[i][0]);",
+							"    var endDateTime = moment(retrievedEventData[i][1]);",
+							"    //use the difference in time in minutes to approximate ",
+							"    //expected number of devices retrieved in time window. ",
+							"    var differenceInMins = endDateTime.diff(startDateTime, 'minutes');",
+							"    var concatString = \"\\nFrom: \\n\\t\" + startDateTime + \"\\nTo:\\n\\t\" + endDateTime;",
+							"    ",
+							"    console.log(\"\\n---------------------------------------------------\\nTime Window (in epoch time):\" + concatString);",
+							"    console.log(\"Time between start and end: \" + endDateTime.diff(startDateTime, 'seconds') + \" seconds === \" + differenceInMins + \" Minutes === \" + endDateTime.diff(startDateTime, 'hours') + \" hours\");",
+							"    console.log(\"Time increment/interval: \" + retrievedEventData[i][3][0]);",
+							"    var approximateDevicesRetrieved = parseInt(differenceInMins)/parseInt(retrievedEventData[i][3][1]);",
+							"    console.log(\"number of events retrieved in time window: \" + retrievedEventData[i][2] + \"\\n\");",
+							"    console.log(\"Approximated devices retrieved: \" + approximateDevicesRetrieved);",
+							"    var percentage = approximateDevicesRetrieved/retrievedEventData[i][2];",
+							"    console.log(\"Margin of Error: \" + percentage.toFixed(3) + \"%\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/eodg85ZFvcPosnuoXMOC/actions/getEventData?eventType=CL__CHWR__T&bucketize=FIRST&startDateTime=2019-08-31T00:00:00&endDateTime=2019-09-01T00:00:00&increment=UD_INC_HOUR",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"eodg85ZFvcPosnuoXMOC",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "CL__CHWR__T"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2019-08-31T00:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-09-01T00:00:00"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_HOUR"
+						}
+					]
+				},
+				"description": "Post Scripy in this test processes and formats data from all 5 device event requests. "
+			},
+			"response": []
+		}
+	]
+}
