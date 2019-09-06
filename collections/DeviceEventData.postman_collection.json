@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\n}"
+					"raw": "{\n\"user_login\":\"{{C}}\",\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\n}"
 				},
 				"url": {
 					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",

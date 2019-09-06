@@ -13,7 +13,7 @@ def files(path):
 for file in files(folder):
     # print 'processing {}'.format(file)
     # use quotes so the shell can handle spaces in filenames
-    cmd = 'newman run "{}" -e environments/IoTFullTest.postman_environment.json'.format(file)
+    cmd = 'newman run "{}" -e environments/IotFullTest.postman_environment.json'.format(file)
     os.system(cmd)
 
 print 'done!'
