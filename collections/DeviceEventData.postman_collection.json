@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"user_login\":\"{{C}}\",\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\n}"
+					"raw": "{\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\n}"
 				},
 				"url": {
 					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
@@ -1177,15 +1177,15 @@
 							"    var endDateTime = moment(retrievedEventData[i][1]);",
 							"    //use the difference in time in minutes to approximate ",
 							"    //expected number of devices retrieved in time window. ",
-							"    var differenceInMins = endDateTime.diff(startDateTime, 'minutes');",
+							"    var differenceInMins = Math.round(endDateTime.diff(startDateTime, 'minutes', true));",
 							"    var concatString = \"\\nFrom: \\n\\t\" + startDateTime + \"\\nTo:\\n\\t\" + endDateTime;",
 							"    ",
 							"    console.log(\"\\n---------------------------------------------------\\nTime Window (in epoch time):\" + concatString);",
-							"    console.log(\"Time between start and end: \" + endDateTime.diff(startDateTime, 'seconds') + \" seconds === \" + differenceInMins + \" Minutes === \" + endDateTime.diff(startDateTime, 'hours') + \" hours\");",
+							"    console.log(\"Time between start and end: \" + Math.round(endDateTime.diff(startDateTime, 'seconds', true)) + \" seconds === \" + differenceInMins + \" Minutes === \" + Math.round(endDateTime.diff(startDateTime, 'hours', true)) + \" hours\");",
 							"    console.log(\"Time increment/interval: \" + retrievedEventData[i][3][0]);",
-							"    var approximateDevicesRetrieved = parseInt(differenceInMins)/parseInt(retrievedEventData[i][3][1]);",
-							"    console.log(\"number of events retrieved in time window: \" + retrievedEventData[i][2] + \"\\n\");",
-							"    console.log(\"Approximated devices retrieved: \" + approximateDevicesRetrieved);",
+							"    var approximateDevicesRetrieved = Math.round(differenceInMins)/Math.round((retrievedEventData[i][3][1]));",
+							"        console.log(\"Estimated # retrieved devices: \" + approximateDevicesRetrieved);",
+							"    console.log(\"Actual # retrieved devices: \" + retrievedEventData[i][2] + \"\\n\");",
 							"    var percentage = approximateDevicesRetrieved/retrievedEventData[i][2];",
 							"    console.log(\"Margin of Error: \" + percentage.toFixed(3) + \"%\");",
 							"}"
