@@ -1,0 +1,24 @@
+{
+  "name": "iot-tests",
+  "version": "1.0.0",
+  "description": "CI/CD project for IoT cluster",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install newman"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/candicontrols/IoT-Tests.git"
+  },
+  "author": "Pirouz Mehmandoost",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/candicontrols/IoT-Tests/issues"
+  },
+  "homepage": "https://github.com/candicontrols/IoT-Tests#readme",
+  "dependencies": {
+    "newman-reporter-html": "^1.0.3",
+    "newman-reporter-htmlextra": "^1.8.9",
+    "reporter": "^0.1.0"
+  }
+}
