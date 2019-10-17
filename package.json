@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/candicontrols/IoT-Tests#readme",
   "dependencies": {
-    "newman-reporter-html": "^1.0.3",
+    "newman-reporter-html": "^1.0.4",
     "newman-reporter-htmlextra": "^1.8.9",
     "reporter": "^0.1.0"
   }
