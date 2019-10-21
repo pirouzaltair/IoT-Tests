@@ -4,6 +4,7 @@ import os
 folder = 'collections'
 extension = '.json'
 
+os.system('npm install -g npm')
 os.system('npm install -g newman-reporter-html')
 os.system('npm install -g newman-reporter-htmlextra')
 
