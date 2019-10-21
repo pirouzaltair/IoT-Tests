@@ -4,7 +4,8 @@ import os
 folder = 'collections'
 extension = '.json'
 
-os.system('npm i -g newman-reporter-htmlextra')
+os.system('npm install -g newman-reporter-html')
+os.system('npm install -g newman-reporter-htmlextra')
 
 def files(path):
     for file in os.listdir(path):
