@@ -47,7 +47,7 @@ Step 2: Remove all but n number of reports from r'
 * let m be largest common multiple between r' and c.
   Trim r' to = k, so 0 < (k = c*m) <= r'
 
-A quick and dirty C++ example:
+pseudocode:
 ___________________________________________
     bool foundFactor = false;
     for (int i = r'; i > 0; i--) {
