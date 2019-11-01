@@ -8,20 +8,20 @@ THRESHOLD=""                                   # Max number of reports per colle
 MAX_AGE=1                                      # Max age for a report.
 
 usage() {                                      # Function: Print a help message.
-  echo "Usage: $0 [ -n THRESHOLD ] [ -t MAX_AGE ]" 1>&2
+  echo "Usage: $0 [ -l LIMIT ] [ -d DAYS_OLD ]" 1>&2
 }
 exit_abnormal() {                              # Function: Exit with error.
   usage
   exit 1
 }
-while getopts ":n:t:" options; do              # Loop: Get the next option;
+while getopts ":l:d:" options; do              # Loop: Get the next option;
                                                # use silent error checking;
-                                               # options n and t take arguments.
+                                               # options l and d take arguments.
   case "${options}" in
-    n)                                         # If the option is n,
+    l)                                         # If the option is l,
       THRESHOLD=${OPTARG}                      # set $THRESHOLD to specified value.
       ;;
-    t)                                         # If the option is t,
+    d)                                         # If the option is d,
       MAX_AGE=${OPTARG}                        # Set $MAX_AGE to specified value.
       re_isanum='^[0-9]+$'                     # Regex: match whole numbers only
       if ! [[ $MAX_AGE =~ $re_isanum ]] ; then # if $MAX_AGE not a whole number:
