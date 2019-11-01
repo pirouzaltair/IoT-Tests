@@ -4,10 +4,10 @@ import os
 folder = 'collections'
 extension = '.json'
 
-# os.system('npm install -g npm')
-# os.system('npm install -g newman')
-# os.system('npm install -g newman-reporter-html')
-# os.system('npm install -g newman-reporter-htmlextra')
+os.system('npm install -g npm')
+os.system('npm install -g newman')
+os.system('npm install -g newman-reporter-html')
+os.system('npm install -g newman-reporter-htmlextra')
 
 def files(path):
     for file in os.listdir(path):
@@ -20,6 +20,4 @@ for file in files(folder):
     # use quotes so the shell can handle spaces in filenames
     cmd = 'newman run "{}" -e environments/IoTFullTest.postman_environment.json -r htmlextra --reporter-htmlextra-logs'.format(file)
     os.system(cmd)
-
-os.system('sh testargs.sh -n 2 -t 1')
 print 'done!'
