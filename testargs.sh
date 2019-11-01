@@ -44,7 +44,12 @@ while getopts ":n:t:" options; do              # Loop: Get the next option;
 done
 
 #remove files > the set maximum age (in days)
-find newman -type f -mmin -$((60*24*$MAX_AGE)) -exec ls -halt {} +
+# find newman -type f -mmin +$((60*24*$MAX_AGE)) -exec ls -halt {} +
+find newman -type f -mmin +$((60*24*$MAX_AGE)) -exec rm -f {} +
+echo reports removed after trimming off desired reports by age:
+find newman -type f -mmin +$((60*24)) -exec ls -halt {} + | wc -l ;
+echo they are:
+find newman -type f -mmin +$((60*24)) -exec ls -halt {} +
 
 # NUM_COLLECTIONS: quantity of collections in collections directory
 # CURRENT_NUM_REPORTS: quantity of reports in newman directory
@@ -53,59 +58,50 @@ find newman -type f -mmin -$((60*24*$MAX_AGE)) -exec ls -halt {} +
 NUM_COLLECTIONS=$(ls -1 collections | wc -l)
 CURRENT_NUM_REPORTS=$(ls -1 newman | wc -l)
 NUM_REPORTS_PER_COLLECTION=$(expr $CURRENT_NUM_REPORTS / $NUM_COLLECTIONS)
-declare -i GCM=0
-# echo
-# echo The set threshold is $THRESHOLD reports per collection
-# echo the set max age is $MAX_AGE days
-# echo there are $NUM_COLLECTIONS collections
-# echo there are $CURRENT_NUM_REPORTS reports
-# echo there are $NUM_REPORTS_PER_COLLECTION reports per collection
-# echo
+# declare -i GCM=0
+echo
+echo The set threshold is $THRESHOLD reports per collection
+echo the set max age is $MAX_AGE days
+echo there are $NUM_COLLECTIONS collections
+echo there are $CURRENT_NUM_REPORTS reports
+echo there are $NUM_REPORTS_PER_COLLECTION reports per collection
+echo
+#if there are more reports-per-collection than desired
+if test "$NUM_REPORTS_PER_COLLECTION" -gt "$THRESHOLD"
+then
+# if r is odd then made it even
+  is_even=$(( $CURRENT_NUM_REPORTS % 2 ))
+  if [ $is_even -eq 0 ]
+  then
+    let CURRENT_NUM_REPORTS+=1
+  fi
 
-if test "$NUM_REPORTS_PER_COLLECTION" -gt "$THRESHOLD"  #if there are more reports-per-collection than desired
-then                                                    #find greatest common multiple
-  z=$(expr $NUM_COLLECTIONS - $THRESHOLD)
-  y=$(expr $NUM_COLLECTIONS \* $z)
-  x=$(expr $CURRENT_NUM_REPORTS - $y )
-  showback=$(expr $x / $NUM_COLLECTIONS )
-  n=$(expr $x)
-  num_to_delete=$(expr $n \* -1 )
-  num_to_delete=$(expr $num_to_delete - 1 )
-
-  # echo n is $showback and there should be $num_to_delete files removed
-  # num_to_delete=$(expr $CURRENT_NUM_REPORTS - $n )
-  # num_to_delete=$(expr $num_to_delete \* -1)
-
-  ls newman -t | cat | head $num_to_delete | xargs -I{} mv newman/{} deletefile
+  # if r = number of existing reports,
+  # c is the number of collections,
+  # and n is the arg passed:
+  # r - cn = num of reports remaining
+  # cn = num of reports to remove
+  cn=$(expr $NUM_COLLECTIONS \* $THRESHOLD)
+  r=$(expr $CURRENT_NUM_REPORTS)
+  fn=$(expr $r - $cn)
+  num_to_delete=$(expr $fn \* -1 )
+  let num_to_delete+=1
+  echo $num_to_delete files should be remove and there should be $cn files remaining
+  ls -t -r newman | cat | head $num_to_delete | xargs -I{} mv newman/{} deletefile
   rm deletefile
-
-  # for (( i=CURRENT_NUM_REPORTS; i>=1; i-- ))
-  # do
-  #   REM=$(( $CURRENT_NUM_REPORTS % i ))
-  #   declare -i TARGET_REM=0
-  #   if [ $REM -eq $TARGET_REM ]
-  #   then
-  #     # echo remainder is $(( $CURRENT_NUM_REPORTS % $i ))
-  #     # echo remainder is $REM
-  #     GCM=$(expr $i + 0)
-  #     echo FOUND GCM $i
-  #     echo So there should only be like 2 reports left
-  #     break
-  #   fi
-  # done
 fi
 
-# echo
-# echo remaining reports:
-# echo
-# ls -l newman
-# echo
+echo
+echo remaining reports:
+echo
+ls -lt newman
+echo
 
-unset z
-unset y
-unset x
+unset c
+unset r
 unset n
-unset showback
+unset cn
+unset is_even
 unset num_to_delete
 unset NUM_COLLECTIONS
 unset THRESHOLD
