@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "dee1a2a9-52b9-4a0b-bee0-534c2e05b3f6",
+		"name": "C2068 Get Device Event Data ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "823f0477-9671-46bb-ac96-f92c72481788",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							"pm.environment.set(\"variable_key\", \"variable_value\");",
+							"pm.environment.unset(\"variable_key\", \"variable_value\");",
+							"pm.variables.get(\"variable_key\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\r\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"login"
+					]
+				},
+				"description": "Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Site Devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68c9067a-dc56-4db8-b661-a32226c79ee1",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices"
+					]
+				},
+				"description": "Getting site devices, retrieving deviceCd"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34a70d2a-9d0b-41e3-94a7-a6a5dd2385d8",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/Yw0VfB3LpS44cHDs2Vp7/actions/getEventData?startDateTime=2012-07-01T00:00:00-08:00&endDateTime=2019-08-28T00:00:00-08:00&bucketize=FIRST&eventType=UD_DTYPE_KWH_ODM&increment=UD_INC_MIN",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"Yw0VfB3LpS44cHDs2Vp7",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "startDateTime",
+							"value": "2012-07-01T00:00:00-08:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2019-08-28T00:00:00-08:00"
+						},
+						{
+							"key": "bucketize",
+							"value": "FIRST"
+						},
+						{
+							"key": "eventType",
+							"value": "UD_DTYPE_KWH_ODM"
+						},
+						{
+							"key": "increment",
+							"value": "UD_INC_MIN"
+						}
+					]
+				},
+				"description": "empty queries"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data  - Event Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0a5c884-e9d7-48c5-8338-570916773aa3",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data - Compact False",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "852e36b1-3291-4d09-b941-92d67a60b586",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}&compact=false",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						}
+					]
+				},
+				"description": "event type, compact"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data - Invalid startDateTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b588663c-da73-4f02-ba82-3dc0446dbf26",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}&compact=false&startDatetime={{invalidDatetime}}",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						},
+						{
+							"key": "startDatetime",
+							"value": "{{invalidDatetime}}"
+						}
+					]
+				},
+				"description": "event type, compact, invalid startDatetime"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data - Invalid End dateTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6c63ba-561a-4417-90e2-9c53dc2b14a8",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}&compact=false&endDatetime={{invalidDatetime}}&startDatetime={{startDatetime}}",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						},
+						{
+							"key": "endDatetime",
+							"value": "{{invalidDatetime}}"
+						},
+						{
+							"key": "startDatetime",
+							"value": "{{startDatetime}}"
+						}
+					]
+				},
+				"description": "event type, compact, startDatetime, invalid endDatetime"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data - Bad End dateTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4522ed6d-9001-45ff-ab7b-f3e3e4fa14b4",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}&compact=false&startDatetime={{startDatetime}}&endDatetime={{badEndDatetime}}",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						},
+						{
+							"key": "startDatetime",
+							"value": "{{startDatetime}}"
+						},
+						{
+							"key": "endDatetime",
+							"value": "{{badEndDatetime}}"
+						}
+					]
+				},
+				"description": "event type, compact, startDatetime, bad endDatetime"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event data - no endDatetime, no bucketize parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaa0b2bc-95d5-4089-a8ad-7293dfd03b9d",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType={{eventType}}&compact=false&startDatetime={{startDatetime}}",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "{{eventType}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						},
+						{
+							"key": "startDatetime",
+							"value": "{{startDatetime}}"
+						}
+					]
+				},
+				"description": "Get device event data, no endDatetime"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Device Event Data - Correct dateTimes, no bucketize parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df1550e5-3d3f-4829-8d3b-fdcef8642dfd",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '409';",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices/{{SITE1_BACNET_CHILLER_DEVICECD}}/actions/getEventData?eventType=DET_COOLING_LOAD&startDatetime={{startDatetime}}&endDatetime={{endDatetime}}&compact=false",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices",
+						"{{SITE1_BACNET_CHILLER_DEVICECD}}",
+						"actions",
+						"getEventData"
+					],
+					"query": [
+						{
+							"key": "eventType",
+							"value": "DET_COOLING_LOAD"
+						},
+						{
+							"key": "startDatetime",
+							"value": "{{startDatetime}}"
+						},
+						{
+							"key": "endDatetime",
+							"value": "{{endDatetime}}"
+						},
+						{
+							"key": "compact",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Get device event data"
+			},
+			"response": []
+		}
+	]
+}

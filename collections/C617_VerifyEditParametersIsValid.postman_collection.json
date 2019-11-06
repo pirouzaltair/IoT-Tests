@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "6ba4b7d1-1140-4f1b-a8bb-e0a5de042cb5",
+		"name": "Device - C617 verify editParameters is valid - IoT",
+		"description": "Device required. This test will continue to fail until a device is provisioned for it. Test verifies that device has editParameters object",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login as gsysadmin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ade467a9-7571-4d18-830d-5e6def8ca002",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\r\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Site 1's Devices, verify that each possesses an editParameters object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5a3fabb9-7492-49d2-bff3-716868aca585",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"var assert = require ('assert');",
+							"var devices = pm.response.json().data;",
+							"",
+							"//check if each device on CLH site has an editParameters object",
+							"for(var i = 0; i < devices.length; i++) {",
+							"    if(!devices[i].hasOwnProperty('editParameters')) {",
+							"        assert.ok(false, \"Error, No editParameters found.\");",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/devices?editParameters=true",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "editParameters",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9c17eb50-c77d-4450-9e15-7df8c2fc6dce",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ab9cb856-0f36-428e-a674-254a7a29e29d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

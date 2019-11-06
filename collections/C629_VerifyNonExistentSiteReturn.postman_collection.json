@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "dbc97a03-5e7d-402f-92f4-3e3923f83785",
+		"name": "Site - C629 verify non-existent site return - IoT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login as gsysadmin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7b8be55-e259-4c95-8507-d9d835d44706",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"user_login\":\"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\r\n\"user_password\":\"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get bad site, verify expected behavior",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57a5f92f-cf51-4f08-939e-a432c28ec1ed",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '403';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/idontexist/",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"idontexist",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

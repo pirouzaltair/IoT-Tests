@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "04ae9e8b-ea76-409e-897c-16de04504155",
+		"name": "Site Actions - deviceStatus - IoT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login as gsysadmin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e67330d-cf40-4962-b755-8d998f1099db",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_login\": \"{{CANDI_USER_G_SYSADMIN_LOGIN}}\",\r\n  \"user_password\": \"{{CANDI_USER_G_SYSADMIN_PASSWORD}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/login",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify that GET/deviceStatus returns status 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "85db3a5b-7dcf-439f-b4df-152e0bc0b5c8",
+						"exec": [
+							"//==== This section is Postman-compliant ====",
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';",
+							"",
+							"try {",
+							"\ttests[\"Response.data is correct\"] = !_.isEmpty(JSON.parse(responseBody).data);",
+							"}",
+							"catch(e) {",
+							"\ttests[\"Response.data is correct\"] = false;",
+							"\tconsole.log(\"Could not parse JSON\");",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CANDI_CLOUD_URL}}/{{CANDI_CLOUD_API_PATH}}/sites/{{CARBON_LIGHTHOUSE_SITECD}}/actions/deviceStatus",
+					"host": [
+						"{{CANDI_CLOUD_URL}}"
+					],
+					"path": [
+						"{{CANDI_CLOUD_API_PATH}}",
+						"sites",
+						"{{CARBON_LIGHTHOUSE_SITECD}}",
+						"actions",
+						"deviceStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
