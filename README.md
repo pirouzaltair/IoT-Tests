@@ -4,22 +4,22 @@
 
 ## Contents
 
- * [Description](#description)
- * [Requires](#requires)
- * [Getting Started](#getting-started)
-  * [fileManager](#using-file-manager)
-  * [Running with the CLI](#running-the-tool)
-  * [Arguments](#change-filemanager-settings)
-  * [Using Jenkins](#using-Jenkins)
-	  * [Build Script](#build-script)
-	  * [Post-Build Script](#post-build-script)
-  * [Managing Github Repo](#github)
-    * [Commits](#build-script)
-    * [Merging Pull Requests](#pull-requests)
- * [Future Features](#future-features)
+* [Description](#description)
+* [Requires](#requires)
+* [Getting Started](#getting-started)
+    * [fileManager](#using-file-manager)
+    * [Running with the CLI](#running-the-tool)
+        * [Arguments](#change-filemanager-settings)
+        * [Using Jenkins](#using-Jenkins)
+            * [Build Script](#build-script)
+            * [Post-Build Script](#post-build-script)
+        * [Managing Github Repo](#github)
+            * [Commits](#build-script)
+            * [Merging Pull Requests](#pull-requests)
+* [Future Features](#future-features)
     * [Better Data Management](#better-data-management)
     * [CLI](#cli)
- * [Authors](#authors)
+* [Authors](#authors)
 
 ## Description
 This repository consists of components which ultimately intended to be used by a Jenkins job, however it may be utilized as a CLI tool on a local machine if need be.
@@ -30,13 +30,13 @@ At its core, IoT-Tests uses the Altair SmartEdge API and Postman/Newman to:
 
 ## Requires
 
-IoT-Tests uses a number of open source projects to work properly. Thanks to @dannydainton, a visually appealing extionsion of newman-html-reports is available for us to utilize. It is assumed that you have Postman installed locally. If you do not have Newman installed, follow the installation guidelines as listed in the link below:
+IoT-Tests uses a number of open source projects to work properly. It is assumed that you have Postman installed locally. If you do not have Newman installed, follow the installation guidelines as listed in the link below:
 * [Node](https://nodejs.org/)
 * [NPM](https://www.npmjs.com/)
 * Python 3.5 or higher
 * [Postman](https://www.getpostman.com/)
 * [Newman](https://www.npmjs.com/package/newman)
-[Newman Reporter HTML](https://www.npmjs.com/package/newman-reporter-html) and [Newman Reporter HTMLExtra](https://www.npmjs.com/package/newman-reporter-htmlextra) are Node packages which are installed or updated automatically.
+_[Newman Reporter HTML](https://www.npmjs.com/package/newman-reporter-html) and [Newman Reporter HTMLExtra](https://www.npmjs.com/package/newman-reporter-htmlextra) are Node packages which are installed or updated automatically._
 
 ## Getting Started
 
@@ -50,7 +50,7 @@ cd IoT-Tests
 python runCollections.py
 ```
 
-## Using fileManager
+### Using fileManager
 
 fileManager.sh is a shell script which affords a hands-off approach to organizing an ever-changing flow of test reports. The script enforces a lifespan for all reports as well as a maximum quantity of reports retained per-test. As the quantity of reports are housed within the `newman` file may be ever-growing and proportional to the quantity of tests, manual file management _should_ be automated.
 
@@ -65,17 +65,17 @@ cd IoT-Tests
 ...then run:
 
 ```
-sh filemanager.sh -n {A NUMERIC LIMIT ON REPORTS-PER-TEST} -t {MAX LIFESPAN IN DAYS}
+sh filemanager.sh -n {A NUMERIC LIMIT ON REPORTS-PER-TEST} -d {MAX LIFESPAN IN DAYS}
 ```
 
 Under the hood, each Postman collections is run and a corresponding Newman report is produced. A shell script is then invoked which acts as a garbage collection utility, removing reports to maintain a provided limit and enforce a lifespan.
 Say that in some case you maintain a Jenkins job which builds once every workday and runs 50 tests- you would have 250 collections per work week if you leave your `newman` directory untouched. You have two ways to manage the quantity of reports at any given time:
 
-1. Retain only reports younger than _t_ days old.
+1. Retain only reports younger than _d_ days old.
 
 2. Retain only a certain number of reports per-test/Postman collection.
 
-3. The conjunction of both conditions: Retain only reports younger than _t_ days old _AND_ retain a maximum of _n_ reports-per-collection.
+3. The conjunction of both conditions: Retain only reports younger than _d_ days old _AND_ retain a maximum of _n_ reports-per-collection.
 
 An explanation of how files are managed is as so:
 
@@ -103,6 +103,26 @@ _f(1) = 50 - 50 * 1 = 0_
 
 _0_ reports will be removed.
 
+### Using Jenkins
+the Jenkins job IoT-Tests pulls from the master branch of this repo and commits new branches which are to be manually merged upon review. Each branch consists only of the delection and generation of reports in the `newman` directory. Merging changes is the only manual step a user plays in any Jenkins-related process, and future refactors may afford the option to automate this step.
+
+#### Build Script
+
+
+
+
+
+
+### Managing Github Repo
+#### Commits
+#### Merging Pull Requests
+
+
+
+
+
+
+
 ## Future Features
 <br>
 #### Improved CLI
@@ -112,6 +132,8 @@ Ideally the CLI would be refactored to provide options for invoking any suite of
 #### Better Data Management
 
 A perfect design would allow for a complete history of adds, deletes, and errors for an entire Postman environment's most recent test run.
+
+ As is noted, merging branches to master is the only manual step a user plays in any Jenkins-related process, and future refactors may afford the option to automate this step.
 
 ## Acknowledgements
 
