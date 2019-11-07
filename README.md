@@ -1,5 +1,5 @@
 # IoT-Tests
-<br>
+
 ### An Altair API Testing Framework for the IoT cluster
 
 ## Contents
@@ -56,7 +56,7 @@ fileManager.sh is a shell script which affords a hands-off approach to organizin
 
 ### Running With the CLI
 
-####This feature is still being constructed.
+#### This feature is still being constructed.
 
 For now: To get started, cd into the `IoT-Tests` directory:
 ```
@@ -124,7 +124,7 @@ the Jenkins job IoT-Tests pulls from the master branch of this repo and commits 
 
 
 ## Future Features
-<br>
+
 #### Improved CLI
 
 Ideally the CLI would be refactored to provide options for invoking any suite of tests and their respective reports followed by a proverbial garbage run. Current plans are to add support for mustache files and handlebars.js for more custimizeable Postman reporting.
