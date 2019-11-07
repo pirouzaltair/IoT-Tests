@@ -7,18 +7,18 @@
  * [Description](#description)
  * [Requires](#requires)
  * [Getting Started](#getting-started)
-     * [fileManager](#using-file-manager)
-	    * [Running with the CLI](#running-the-tool)
-	    * [Arguments](#change-filemanager-settings)
-     * [Using Jenkins](#using-Jenkins)
-	    * [Build Script](#build-script)
-	    * [Post-Build Script](#post-build-script)
-    * [Managing Github Repo](#github)
-	    * [Commits](#build-script)
-	    * [Merging Pull Requests](#pull-requests)
+  * [fileManager](#using-file-manager)
+  * [Running with the CLI](#running-the-tool)
+  * [Arguments](#change-filemanager-settings)
+  * [Using Jenkins](#using-Jenkins)
+	  * [Build Script](#build-script)
+	  * [Post-Build Script](#post-build-script)
+  * [Managing Github Repo](#github)
+    * [Commits](#build-script)
+    * [Merging Pull Requests](#pull-requests)
  * [Future Features](#future-features)
-	 * [Better Data Management](#better-data-management)
-	 * [CLI](#cli)
+    * [Better Data Management](#better-data-management)
+    * [CLI](#cli)
  * [Authors](#authors)
 
 ## Description
@@ -56,7 +56,7 @@ fileManager.sh is a shell script which affords a hands-off approach to organizin
 
 ### Running With the CLI
 
-####This feature is still beinh constructed.
+####This feature is still being constructed.
 
 For now: To get started, cd into the `IoT-Tests` directory:
 ```
