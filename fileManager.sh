@@ -60,11 +60,11 @@ CURRENT_NUM_REPORTS=$(ls -1 newman | wc -l)
 NUM_REPORTS_PER_COLLECTION=$(expr $CURRENT_NUM_REPORTS / $NUM_COLLECTIONS)
 # declare -i GCM=0
 echo
-echo The set threshold is $THRESHOLD reports per collection
-echo the set max age is $MAX_AGE days
-echo there are $NUM_COLLECTIONS collections
-echo there are $CURRENT_NUM_REPORTS reports
-echo there are $NUM_REPORTS_PER_COLLECTION reports per collection
+echo The set threshold is $THRESHOLD reports per collection.
+echo the set max age is $MAX_AGE days.
+echo there are $NUM_COLLECTIONS collections.
+echo there are $CURRENT_NUM_REPORTS reports.
+echo there are $NUM_REPORTS_PER_COLLECTION reports per collection.
 echo
 #if there are more reports-per-collection than desired
 if test "$NUM_REPORTS_PER_COLLECTION" -gt "$THRESHOLD"
@@ -86,7 +86,7 @@ then
   fn=$(expr $r - $cn)
   num_to_delete=$(expr $fn \* -1 )
   let num_to_delete+=1
-  echo $num_to_delete files should be remove and there should be $cn files remaining
+  echo $num_to_delete files should be removed and there should be $cn files remaining.
   ls -t -r newman | cat | head $num_to_delete | xargs -I{} mv newman/{} deletefile
   rm deletefile
 fi
