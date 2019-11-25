@@ -52,9 +52,11 @@ def main(argv):
         elif opt in ('-d', '--days'):
             max_age = arg
         else:
-            print 'Error- must provide 2 arguments.'
-            menu()
-            sys.exit(2)
+            max_age = 1
+            reports_per_collection = 1
+            # print 'Error- must provide 2 arguments.'
+            # menu()
+            # sys.exit(2)
 
     for file in files(folder):
         # print 'processing {}'.format(file)
