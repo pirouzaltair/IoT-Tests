@@ -65,7 +65,7 @@ def main(argv):
         os.system(newman_cmd)
 
     file_manager_cmd = '\n\nsh fileManager.sh -l ' + reports_per_collection + ' -d ' + max_age
-    os.system(file_manager_ccmd)
+    os.system(file_manager_cmd)
     sys.exit()
 
 if __name__ == "__main__":
